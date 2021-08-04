@@ -17,6 +17,7 @@ sudo systemctl enable --now mariadb
 sudo yum install -y php-dom php-gd php-simplexml php-xml php-opcache php-mbstring php-pgsql
 sudo amazon-linux-extras enable php7.4
 
+sudo yum update -y
 export AWS_DEFAULT_REGION=us-east-1
 
 # secret=$(aws secretsmanager get-secret-value --secret-id sql-key | jq .SecretString | jq fromjson)
@@ -37,9 +38,9 @@ echo $x
 sudo mysql -h "$x" -P 3306 -u ${master_user} -p${master_pass} -e "FLUSH PRIVILEGES;"
 
 cd /tmp && wget https://www.drupal.org/download-latest/tar.gz
-sudo tar -zxvf tar*.gz -C /usr/share/nginx/html/ 
+sudo tar -zxvf *tar*.gz -C /usr/share/nginx/html/ 
 cd /usr/share/nginx/html/
-sudo mv drupal-9.2.2 drupal
+sudo mv drupal-* drupal
 sudo chown -R nginx:nginx /usr/share/nginx/html/
 sudo chmod -R 755 /usr/share/nginx/html/
 
